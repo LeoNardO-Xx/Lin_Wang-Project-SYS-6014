@@ -133,14 +133,14 @@
 
   where yᵢ is the target, wᵢ is the coefficient, xᵢ is the predictor and for any value that falls outside of  $\varepsilon$ , we can denote its deviation from the margin as $\xi$.
 
-  <p align="center">
+ <p align="center">
 	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325154907362.png">
 </p>
 
   The plot below shows the results of a trained SVR model on the Boston Data Festival Hackathon data. The red line represents the line of best fit and the black lines represent the margin of error, ϵ, which we set to 5 ($5,000) and set *C*=1.0.
 
 
-    <p align="center">
+<p align="center">
 	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325155112426.png">
 </p>
 
@@ -149,7 +149,7 @@
   Below is a plot of the grid search results, with values of *C* on the x-axis and *% within Epsilon* and *MAE* on the left and right y-axes, respectively.
 
 
-    <p align="center">
+ <p align="center">
 	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325155514433.png">
 </p>
 
@@ -158,7 +158,7 @@
 
   Let’s build one last model with our final hyperparameters, ϵ=5, *C*=6.13.
 
-    <p align="center">
+ <p align="center">
 	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325155547750.png">
 </p>
 
