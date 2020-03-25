@@ -113,8 +113,11 @@
   where *n* is a non-negative [integer](https://en.wikipedia.org/wiki/Integer) that defines the degree of the polynomial. A polynomial with a degree of 0 is simply a [constant function](https://en.wikipedia.org/wiki/Constant_function); with a degree of 1 is a [line](https://en.wikipedia.org/wiki/Linear_function); with a degree of 2 is a [quadratic](https://en.wikipedia.org/wiki/Quadratic_function); with a degree of 3 is a [cubic](https://en.wikipedia.org/wiki/Cubic_function), and so on.
 
   
+<p align="center">
+	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325162624600.png">
+</p>
 
-  <img src="/Users/leonardo/Library/Application Support/typora-user-images/image-20200325162624600.png" alt="image-20200325162624600" style="zoom:45%;" />
+
 
   Historically, polynomial models are among the most frequently used empirical models for [curve fitting](https://en.wikipedia.org/wiki/Curve_fitting).
 
@@ -130,23 +133,34 @@
 
   where yᵢ is the target, wᵢ is the coefficient, xᵢ is the predictor and for any value that falls outside of  $\varepsilon$ , we can denote its deviation from the margin as $\xi$.
 
-  <img src="/Users/leonardo/Library/Application Support/typora-user-images/image-20200325154907362.png" alt="image-20200325154907362" style="zoom:37%;" />
+  <p align="center">
+	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325154907362.png">
+</p>
 
   The plot below shows the results of a trained SVR model on the Boston Data Festival Hackathon data. The red line represents the line of best fit and the black lines represent the margin of error, ϵ, which we set to 5 ($5,000) and set *C*=1.0.
 
-  <img src="/Users/leonardo/Library/Application Support/typora-user-images/image-20200325155112426.png" alt="image-20200325155112426" style="zoom:37%;" />
+
+    <p align="center">
+	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325155112426.png">
+</p>
 
   The above model seems to fit the data much better. We can go one step further and grid search over *C* to obtain an even better solution. Let’s define a scoring metric, $\% within Epsilon$ This metric measures how many of the total points within our test set fall within our margin of error. We can also monitor how the Mean Absolute Error (*MAE*) varies with *C* as well.
 
   Below is a plot of the grid search results, with values of *C* on the x-axis and *% within Epsilon* and *MAE* on the left and right y-axes, respectively.
 
-  <img src="/Users/leonardo/Library/Application Support/typora-user-images/image-20200325155514433.png" alt="image-20200325155514433" style="zoom:37%;" />
+
+    <p align="center">
+	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325155514433.png">
+</p>
+
 
   As we can see, *MAE* generally decreases as *C* increases. However, we see a maximum occur in the *% within Epsilon* metric. Since our original objective of this model was to maximize the prediction within our margin of error ($5,000), we want t find the value of *C* that maximizes *% within Epsilon*. Thus, *C*=6.13.
 
   Let’s build one last model with our final hyperparameters, ϵ=5, *C*=6.13.
 
-  <img src="/Users/leonardo/Library/Application Support/typora-user-images/image-20200325155547750.png" alt="image-20200325155547750" style="zoom:37%;" />
+    <p align="center">
+	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325155547750.png">
+</p>
 
   The plot above shows that this model has again improved upon previous ones, as expected. 
 
