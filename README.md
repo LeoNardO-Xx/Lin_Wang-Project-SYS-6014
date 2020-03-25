@@ -12,7 +12,10 @@
 
 ​	As long as capital markets have existed, investors and aspiring arbitrageurs alike have strived to gain edges in predicting stock prices. In particular, use of machine-learning techniques and quantitative analysis to make stock price predictions has become increasingly popular with time. Although for my view, it’s hard and rough to get the accuracy predictive result, because there are definitely many parameters and variables you haven't considered, for the real world, the model is more intricacy and complex. However, it is meaning to do some prediction to avoid the failure and decrease risk. 
 
-![image-20200325160451231](/Users/leonardo/Library/Application Support/typora-user-images/image-20200325160451231.png)
+
+<p align="center">
+	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325160451231.png">
+</p>
 
 ​	In these model, by using python, there are several categories of data that can be used when designing a price projection algorithm. These categories and factors summarize a company’s financial history in easy to crunch numbers. These factors are; **sentiment analysis, past prices, sales growth and the dividends** that the company has been paying out to its stockholders. These factors when summarized indicate a company’s vital statistics, and they can be manipulated to predict which circumstances will affect a company’s price in the future and how the company will respond to that. To create a software program that analyzes this data involves installing dependencies, collecting the dataset of the above factors, inputting the script of these factors into the program and finally analyzing the resultant graph.
 
@@ -175,8 +178,9 @@
 
 ### Results & Conclusion 
 
-![image-20200325151321322](/Users/leonardo/Library/Application Support/typora-user-images/image-20200325151321322.png)
-
+<p align="center">
+	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325151321322.png">
+</p>
 ​	
 
 ​	On analyzing the graph, we see that each of our models shows up in the graph and the RBF 	model seems to fit our data the best. Hence, we can use it's prediction in the command line to 	make stock predictions
