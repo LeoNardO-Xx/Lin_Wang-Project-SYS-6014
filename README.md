@@ -1,213 +1,197 @@
-# 		Stock Prices Predictive Model
+# $ \quad$$\quad$$\quad$ Stock Prices Predictive System 
 
-​									Project proposal for University of Virginia
+​									Final Paper for University of Virginia
 
 ​									 SYS 6014 Decision Analysis Spring 2020
 
 ​														$Lin\ Wang \\ \quad lw7kv$	
 
-​													   $Mar\ 25,\  2020$
+​													   $Apr\ 27,\  2020$
 
-### Introduction
+[TOC]
 
-​	As long as capital markets have existed, investors and aspiring arbitrageurs alike have strived to gain edges in predicting stock prices. In particular, use of machine-learning techniques and quantitative analysis to make stock price predictions has become increasingly popular with time. Although for my view, it’s hard and rough to get the accuracy predictive result, because there are definitely many parameters and variables you haven't considered, for the real world, the model is more intricacy and complex. However, it is meaning to do some prediction to avoid the failure and decrease risk. 
 
 
-<p align="center">
-	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325160451231.png">
-</p>
+## Abstract
 
-​	In these model, by using python, there are several categories of data that can be used when designing a price projection algorithm. These categories and factors summarize a company’s financial history in easy to crunch numbers. These factors are; **sentiment analysis, past prices, sales growth and the dividends** that the company has been paying out to its stockholders. These factors when summarized indicate a company’s vital statistics, and they can be manipulated to predict which circumstances will affect a company’s price in the future and how the company will respond to that. To create a software program that analyzes this data involves installing dependencies, collecting the dataset of the above factors, inputting the script of these factors into the program and finally analyzing the resultant graph.
+As long as capital markets have existed, investors and aspiring arbitrageurs alike have strived to gain edges in predicting stock prices. In particular, by using of machine-learning techniques and quantitative analysis to make stock price predictions has become increasingly popular with time. In this project, firstly crawling google historical stock price data from [kaggle](https://www.kaggle.com/ptheru/google-stock-price-prediction-rnn).
+We analyzed the multiple scenarios like predicting the closing price for day, given opening price and predicting the all **open, close, high, low prices and volume of the day** based on historical data since 03/17/2017 to 02/29/2020. 
+In this project, we applied the Support Vector Machines (SVM) model to achieve the final prediction result ，When applying the model, we chose different algorithms to get the results separately In this process, we used Polynomial and Radial Basis Function (RBF) methods as SVR kernels to get different prediction results
+After that, we use Mean Absolute Error (MAE)  and Mean Squared Error (MSE) to evaluate the performance effect for different models 
+Finally, we summarize the performance of different models and use R-squared (R2) to discuss the payoffs of the stock recommendation system. According this project, users can figure out the trend of stock prices through historical data in some degree. It is helpful for users to avoid the failure, decrease risk and gain edges.
 
+***Keywards*** : Stock prices; Support Vector Regression; Deep Learning
 
+### 1. Introduction
 
-### Model of the decision problem
+Stocks are called "money cubes", and the key to economic freedom is stock investment. Although this is the truth of the booming market, amateur trading stocks is still an attractive option today. The question is: which stocks? How to analyze stocks? How to determine the buying and selling of stocks
 
-- **Support Vector Machine**
+The efficient market hypothesis states that the factors that determine the price of stocks in  the future are in the future thus making the future prices of stocks random andunpredictable.   However, using the stock market prediction methods outlined in this program simplifies the   process of prediction by removing the random element out of stock market price futures. The  use of support vector machines for classification and regression analyses gives a scientific       element to the prediction of stock market prices rather than relying on hunches and intuition.    A combination of the thus computed results and sound investment planning will, therefore,   raise an investor’s chance of stock market success.
 
-​	This method builds the predictive model and graphs it. It takes three parameters: dates, prices, and x (the order of elements). This function creates three models, each of them will be a type of support vector machine. A support vector machine is a linear separator.
+In this article, we first grab the historical stock price data of Google from 03/17/2017 to 02/29/2020. You can adjust the start and end dates as needed. In the next analysis process, we will use the closing price, which is the final price of the stock at the end of the day of trading, as a reference for data analysis.
 
-​	It takes data that is already classified and tries to predict a set of unclassified data. So, if we only had two data classes it would look like this:
+First, we use the support vector machine (SVM) model to obtain the final prediction results. In this process, we used the polynomial and radial basis function (RBF) method as the SVR kernel to obtain different prediction results.
 
-<p align="center">
-	<img src = "http://68.media.tumblr.com/0e459c9df3dc85c301ae41db5e058cb8/tumblr_inline_n9xq5hiRsC1rmpjcz.jpg">
-</p>
+After that, we use mean absolute error (MAE) and mean square error (MSE) to evaluate the performance effects of different models
 
+Finally, we summarize the performance of different models and discuss the returns of the stock recommendation system using R-squared (R2). Through this project, users can understand the stock price trend through historical data to a certain extent. This is very helpful for users to avoid failures, reduce risks and gain advantages
 
-  It will be such that the distances between the closest points in each of the two groups are farthest away. When we add a new data point in our graph depending on which side of the line it is, we could classify it accordingly with the label. However, in this program we are not predicting a class label, so we don't need to classify instead we are predicting the next value in a series which means we want to use regression.
+### 2. Data
 
-  <p align="center">
-      <img src = "http://www.saedsayad.com/images/SVR_1.png">
-  </p>
+##### 2.1 Data Collection
 
+The original data is crawled from [kaggle](https://www.kaggle.com/ptheru/google-stock-price-prediction-rnn), crawling all the stock records of Google from 03/17/2017 to 02/29/2020.
 
-  Support Vector Machine's can be used for regression as well. The support vector regression is a type of SVM that uses the space between data points as a margin of error and predicts the most likely next point in a dataset.
+<img src="/Users/leonardo/Library/Application Support/typora-user-images/image-20200428103830710.png" alt="image-20200428103830710" style="zoom:50%;" />
 
-- **Action set $\mathbb{A}$** 
+$\tag {Table 1 Stock prices from Google from 03/02/2017-03/17/2017}$
 
-  The general operation of skateholders, such as Climax(Buying/Selling) ; Dumping; Gap ; Liquidation. e.g A climax occurs at the end of a [bull](https://www.investopedia.com/terms/b/bullmarket.asp) or [bear](https://www.investopedia.com/terms/b/bearmarket.asp) market cycle and is characterized by escalated trading volume and sharp price movements. Climaxes are usually preceded by extreme sentiment readings, either excessive euphoria at market peaks, or excessive pessimism at market bottoms.
+In this project, we used 5 features that are more useful in stock trading. The opening price of the stock, the closing price, the highest price of day, the lowest price of the day and volume of the day.The whoel dataset is too large. It is difficult for individuals to calculate and process the data. Thus, we took one month of data as a sample to evaluate the entire system as a demo.In the next analysis, we will use the closing price, which is the final price of the stock at the end of the day's trading.
 
-- **State space $\mathbb{X}$** 
 
-  The financial market, the interest of public companies or specific to say, the captial market. Capital market is a market where buyers and sellers engage in trade of financial securities like bonds, stocks, etc. The buying/selling is undertaken by participants such as individuals and institutions. ... Generally, this market trades mostly in long-term securities.
 
-- **The parameter space $\Theta$** 
+### 3. Prediction Model
 
-  Financial markets are characterized by the uncertainty about the future prices of stocks, currencies, commodities, interest rates or stock indices.
+##### 3.1 Support Vector Regression
 
-  The set of all possible outcomes is called the Sample Space and we denote it with $\mathbb{X}$ , the probability of a subset $A \in \mathbb{X}$ . We denote it with $P(A)$. 
+Support Vector Machine can also be used as a regression method, maintaining all the main features that characterize the algorithm (maximal margin). The Support Vector Regression (SVR) uses the same principles as the SVM for classification. 
 
-  
+For the SVR, the prediciton function is  
+$$
+{Min} {1\over2}\|w\|^2+C\sum^n_{i=1}|\xi_i| \tag{1}
+$$
+ and the constraints 
+$$
+y_i-wx_i-b≤\epsilon + \varepsilon_i\\
+wx_i+b-y_i≤ \epsilon+ \varepsilon_i \tag{2}
+$$
+<img src="/Users/leonardo/Library/Application Support/typora-user-images/image-20200428024326022.png" alt="image-20200428024326022" style="zoom:50%;" />
 
-- **The data generation process**
+​					$\tag {Figure 1. Principle diagram of SVM}$
 
-  The initial dataset we used was a dataset used by [Hack/Reduce at the Boston Data Festival Predictive Modeling Hackathon](https://www.kaggle.com/c/boston-data-festival-hackathon/data). The training data consisted of the opening, closing, maximum and minimum prices for 94 stocks over 500 days. The hackathon dataset used stock data from 20 years ago, and we wanted to see how our models would perform on more recent data. We wrote a function that reads in a file with stock tickers, one per row, to create a file of stock price data. We assume that we have a list of the S&P 500 stocks, stored in stocks.csv, that lists each stock ticker, along with the associated company name and industry area. We decide to analyze the S&P 500 stocks in 5 different industry areas.
+This method builds the predictive model and graphs it. It takes three parameters: dates, prices(the prices of train set), and x (price of target date). This function creates 2 models, each of them will be a type of support vector machine with different kernel.
 
-  1. Consumer Discretionary
+As Figure .1 shown, tt will be such that the distances between the closest points in each of the two groups are farthest away. When we add a new data point in our graph depending on which side of the line it is, we could classify it accordingly with the label. 
+The support vector regression  uses the space between data points as a margin of error and predicts the most likely next point in a dataset.
 
-  2. Health Care
 
-  3. Information Technology
 
-  4. Financials
+###### 3.1.1 RBF
 
-  5. Industrials
+Gaussian **RBF**(Radial Basis Function) is another popular Kernel method used in **SVM** models for more. **RBF** kernel is a function whose value depends on the distance from the origin or from some point.
 
+And in this project, we use kernel functions transform the data into a higher dimensional feature space to make it possible to perform the linear separation.
 
-- **Utility function**  **and** **Loss function** 
+The prediction function is 
+$$
+y=\sum^N_{i=1}(a_i-a_i^*).K(x_i,x)+b \tag{3}
+$$
+where for the RBF the kernel function is 
+$$
+K(x_i,x_j)=exp(-{\|x_i-x_j\|^2 \over2\sigma^2}) \tag{4}
+$$
+<img src="/Users/leonardo/Library/Application Support/typora-user-images/image-20200428025252596.png" alt="image-20200428025252596" style="zoom:50%;" />
 
-  $P$ is a function that assigns numbers to events in the field $\Theta$, $P : \Theta \rightarrow   [0, 1]$ 
+​	$\tag{Figure 2 Transformation of from liner to non-linear SVR when apply different kernel}$
 
-  The hinge loss term $\sum_imax(0,1-y_i(w^Tx_i+b))$ in soft margin SVM penalizes *misclassifications*. 
 
-  In hard margin SVM there are, by definition, no misclassifications. 
 
-  This indeed means that hard margin SVM tries to minimize $\|w\|^2$. Due to the formulation of the SVM problem, the margin is $2\over \|w\|$. As such, minimizing the norm of $w$ is geometrically equivalent to maximizing the margin
+###### 3.1.2 Polynomial 
 
-  
+Intuitively, the polynomial kernel looks not only at the given features of input samples to determine their similarity, but also combinations of these. In the context of regression analysis, such combinations are known as interaction features. The (implicit) feature space of a polynomial kernel is equivalent to that of polynomial regression, but without the combinatorial blowup in the number of parameters to be learned. 
 
-### The predictive model
+In this porjcet, similarly, we have same prediction function as rdf, but with different kernel function:
+$$
+K(x_i,x_j)=(x_i,x_j)^d \tag{5}
+$$
 
-​	The efficient market hypothesis states that the factors that determine the price of stocks in 	the future are in the future thus making the future prices of stocks random andunpredictable. 	However, using the stock market prediction methods outlined in this program simplifies the 	process of prediction by removing the random element out of stock market price futures. The 	use of support vector machines for classification and regression analyses gives a scientific 	 	element to the prediction of stock market prices rather than relying on hunches and intuition. 	A combination of the thus computed results and sound investment planning will, therefore, 	raise an investor’s chance of stock market success.
 
-- **RBF(Radial basis function)**
+##### 3.2 Evaluation index
 
-  Radial basis function (RBF) networks typically have three layers: an input layer, a hidden layer with a non-linear RBF activation function and a linear output layer. We use RBF model as standard to fit our data, and as a standard to test the performance of predictive model.
+###### 3.2.1 Mean Squared Error
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Radial_funktion_network.svg/1920px-Radial_funktion_network.svg.png" alt="img" style="zoom:20%;" />
+ the mean squared error (MSE) or mean squared deviation (MSD) of an estimator (of a procedure for estimating an unobserved quantity) measures the average of the squares of the errors—that is, the average squared difference between the estimated values and the actual value. MSE is a risk function, corresponding to the expected value of the squared error loss. 
+$$
+\mathrm{MSE}={\frac{1}{|n|} \sum_{i=1}^n\left(Y_i-\hat{Y}_{2}\right)^{2}} \tag{6}
+$$
 
-​		Out funtion $\varphi(x)=\sum^N_{i=1}a_i\rho(\|x-c_i\|)$ 
+###### 3.2.2 Mean Absolute Error
 
-​		Basis function centers can be randomly sampled among the input instances or obtained by 	    Orthogonal Least Square Learning Algorithm or found by [clustering](https://en.wikipedia.org/wiki/Data_clustering) the samples and		 		choosing the cluster means as the centers.
+In statistics, mean absolute error (MAE) is a measure of errors between paired observations expressing the same phenomenon. Examples of Y versus X include comparisons of predicted versus observed
+$$
+MAE={\sum_{i=1}^n|y_i-x_i|\over n} \tag{7}
+$$
 
-​		The RBF widths are usually all fixed to same value which is proportional to the maximum  		distance between the chosen centers.
 
+##### 3.3 Evaluation of Payoffs
 
+###### 3.3.1 R-squared
 
-- **Polynomial Functions model**
+**R**-**squared** is a statistical measure of how close the data are to the fitted regression line. It is also known as the coefficient of determination, or the coefficient of multiple determination for multiple regression.Whereas correlation explains the strength of the relationship between an independent and dependent variable, R-squared explains to what extent the variance of one variable explains the variance of the second variable. In this project, we use R-squared to evaluate the payoffs of using this predictive model . 
+$$
+R^{2}=1-\frac{\sum_{i=1}^{n}\left(y_{pred}-y_{i}\right)^{2}}{\frac{1}{n}\sum_{i=1}^{n}\left(\bar y_{i}-  y_{i}\right)^{2}} \tag{8}
+$$
+If R2 is laydown between 0 ~ 1, the closer to 1, the better the regression fitting effect. Generally, the model with a value of more than 0.8 is considered to have a good fit.
 
-  A [polynomial function](https://en.wikipedia.org/wiki/Polynomial_function) is one that has the form
+###### 3.3.2 Payoffs Calculation
 
-  $y=a_nx^n+a_{n-1}x^{n-1}+...+a_2x^2+a_1x^1+a_0$
+The original probability of retaining a user successfully is assumed as 0.5. Based on the result of different model, this probability would be calculated and renewed as follows: 
+$$
+P=0.5 \times\left(1+R^{2}\right)\tag{9}
+$$
 
-  where *n* is a non-negative [integer](https://en.wikipedia.org/wiki/Integer) that defines the degree of the polynomial. A polynomial with a degree of 0 is simply a [constant function](https://en.wikipedia.org/wiki/Constant_function); with a degree of 1 is a [line](https://en.wikipedia.org/wiki/Linear_function); with a degree of 2 is a [quadratic](https://en.wikipedia.org/wiki/Quadratic_function); with a degree of 3 is a [cubic](https://en.wikipedia.org/wiki/Cubic_function), and so on.
+### 4. Result Analysis
 
-  
-<p align="center">
-	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325162624600.png">
-</p>
+##### 4.1 Performance of different model 
 
+<img src="/Users/leonardo/Library/Application Support/typora-user-images/image-20200428104104024.png" alt="image-20200428104104024" style="zoom:70%;" />
 
+​				$\tag {Table 2 performamce of different model}$ 
 
-  Historically, polynomial models are among the most frequently used empirical models for [curve fitting](https://en.wikipedia.org/wiki/Curve_fitting).
+From the Table 2, we can figure out that when apply RBF model, we get the best performance. RBF has less errors than Poly in MAE and MSE, also has better scores in R2.Thus, we choose RBF as kernel of SVR in this prices prediction project. 
 
-- **SVR**
 
-  SVR gives us the flexibility to define how much error is acceptable in our model and will find an appropriate line (or hyperplane in higher dimensions) to fit the data.
 
-  In contrast to OLS, the objective function of SVR is to minimize the coefficients — more specifically, the $l_2-norm$ of the coefficient vector — not the squared error. The error term is instead handled in the constraints, where we set the absolute error less than or equal to a specified margin, called the maximum error, $\varepsilon$ 
+##### 4.2 Prices compare
 
-  objective function: ${Min} {1\over2}\|w\|^2+C\sum^n_{i=1}|\xi_i|$ 
+<img src="/Users/leonardo/Library/Application Support/typora-user-images/image-20200428104258626.png" alt="image-20200428104258626" style="zoom:70%;" />
 
-  constraints: $|y_i-w_ix_i|≤$ $\varepsilon+|\xi_i|$ 
+​				$\tag{Table 3 The prices compare with testset }$
 
-  where yᵢ is the target, wᵢ is the coefficient, xᵢ is the predictor and for any value that falls outside of  $\varepsilon$ , we can denote its deviation from the margin as $\xi$.
+From Table 3, In this process, we randomly selected a point to test the accuracy of our model stock prediction results. We took March 7 as the object. It was found that the value of RBF(21.5845305) is closer to the real value(21.4) than Poly(22.1197143) compared with the actual value. 
 
- <p align="center">
-	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325154907362.png">
-</p>
+##### 4.3 Payoffs Analysis
 
-  The plot below shows the results of a trained SVR model on the Boston Data Festival Hackathon data. The red line represents the line of best fit and the black lines represent the margin of error, ϵ, which we set to 5 ($5,000) and set *C*=1.0.
+<img src="/Users/leonardo/Library/Application Support/typora-user-images/image-20200428145242075.png" alt="image-20200428145242075" style="zoom:80%;" />
 
+​					$\tag {Table 4 Payoffs of different model}$
 
-<p align="center">
-	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325155112426.png">
-</p>
+According to equation(9), we can calculate the payoffs of each model. And we can easily to figure   out the when apply RBF kernel we get the best performace. And result show It shows predictive model could get 87.44% improvement. 
 
-  The above model seems to fit the data much better. We can go one step further and grid search over *C* to obtain an even better solution. Let’s define a scoring metric, $\% within Epsilon$ This metric measures how many of the total points within our test set fall within our margin of error. We can also monitor how the Mean Absolute Error (*MAE*) varies with *C* as well.
+##### 4.4 Poly Analysis 
 
-  Below is a plot of the grid search results, with values of *C* on the x-axis and *% within Epsilon* and *MAE* on the left and right y-axes, respectively.
+5The support vector regression estimates how each addition or modification of data affects the prediction and outlook on the future prices of stock. The support vector regression can be developed by using either the linear function model, the polynomial functions model or the ration basis model. The different results can then be plotted on one or different graphs for analysis). These graphs are then compared with the actual data from the company’s history and the model that matches the historical data and trends can then be used to predict how the figures will react to market stimulate.
 
+<img src="/Users/leonardo/Library/Application Support/typora-user-images/image-20200428090221354.png" alt="image-20200428090221354" style="zoom:50%;" />
 
- <p align="center">
-	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325155514433.png">
-</p>
+​					$\tag{Figure 3 The polt of final result }$
 
+On analyzing the graph, we see that each of our models shows up in the graph and the RBF 	model seems to fit our data the best. From the Figure 3,  We can find that the overall trends of Poly and RBF are consistent with the actual values, but compared to poly RBF, the actual data has a better fit and performs better in model prediction, but as the amount of data increases, we It can be found that the entire image has the same approach value in the future
 
-  As we can see, *MAE* generally decreases as *C* increases. However, we see a maximum occur in the *% within Epsilon* metric. Since our original objective of this model was to maximize the prediction within our margin of error ($5,000), we want t find the value of *C* that maximizes *% within Epsilon*. Thus, *C*=6.13.
+### 5. Conclusion & Future Work
 
-  Let’s build one last model with our final hyperparameters, ϵ=5, *C*=6.13.
+In this project, we have implemented a stock price prediction system based on the SVM model. The data comes from the trend of Google's stock changes from 2017 to 2020. In the process of establishing this price prediction model. Different kernels are used as algorithms to compare results such as RBF and poly. We conclude that RBF can achieve better performance and performance in this project. In addition, we also compared the real data and the predicted data and found that the error is within the acceptable range, so we verified the accuracy and reliability of the predicted results. Users can use this prediction system to avoid risks in stock trading and obtain greater benefits
 
- <p align="center">
-	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325155547750.png">
-</p>
-
-  The plot above shows that this model has again improved upon previous ones, as expected. 
-
-  
-
-### Quantifying the value-add of your tool
-
-​	Generally, after executing the program, we will get a combination graphs of RBF model, 	 	linear model, polynomial model and original data. We can check the bias and error directly  	from the plots. 
-
-​	For RBF : $a_i(t+1)=a_i(t)+v[x(t+1)-\varphi((t),w)]{u(\|x(t)-c_i)\over \sum^N_{i=1}u^2(\|x(t)-c_i\|)}$
-
-​	For polynomial:  $y=a_nx^n+a_{n-1}x^{n-1}+...+a_2x^2+a_1x^1+a_0$
-
-​	SVR:  ${Min} {1\over2}\|w\|^2+C\sum^n_{i=1}|\xi_i|$
-
-- **Dependencies**
-
-  The dependencies that are installed in the program need to enable the user to collect the dataset with ease, calculate and interpret the numbers in the dataset, build a predictive model based on the past dataset and build a projective model for the future of the stock prices. When running in synchrony, the dependencies help in developing a support vector machine. A support vector machine primarily is a linear separator that takes data that is classified and attempts to predict and classify unclassified data. The support vector machine aid in the calculation of the support vector regression which can be calculated to accurately determine how each addition of data or alteration of market factors will alter the price of stocks. The four dependencies include:
-
-  `pip install csv` : To read data from the stock prices [csv](https://pypi.python.org/pypi/csv)
-
-  `pip install numpy` : To perform calculations  [numpy](http://www.numpy.org/)
-
-  `pip install scikit-learn` : To build a predictive model [scikit-learn](http://scikit-learn.org/)
-
-  `pip install matplotlib` : To plot datapoints on the model to analyze [matplotlib](http://matplotlib.org/)
-
-  
-
-### Results & Conclusion 
-
-<p align="center">
-	<img src = "https://github.com/UVA-Engineering-Decision-Analysis/Lin_Wang-Project-SYS-6014/blob/master/image-20200325151321322.png">
-</p>
-​	
-
-​	On analyzing the graph, we see that each of our models shows up in the graph and the RBF 	model seems to fit our data the best. Hence, we can use it's prediction in the command line to 	make stock predictions
-
-​	The support vector regression estimates how each addition or modification of data affects the 	prediction and outlook on the future prices of stock. The support vector regression can be 	 	developed by using either the linear function model, the polynomial functions model or the 	ration basis model. The different results can then be plotted on one or different graphs for 	 	analysis). These graphs are then compared with the actual data from the company’s history 	and the model that matches the historical data and trends can then be used to predict how 	the figures will react to market stimuliate.
+But the prediction system is still relatively simple. First, because of personal computing power, we only sampled one month in the data. The so-called training object results are relatively simple. In addition, for the real world, we need to consider more parameters and variables, and the model is more complicated. And changeable. In the furture work, we can use more complex deep learning algorithms to provide better, more accurate and reliable stock price prediction models based on big data
 
 
 
 ### Reference 
 
-- [Introduction to Support Vector Machines](https://docs.opencv.org/2.4/doc/tutorials/ml/introduction_to_svm/introduction_to_svm.html#introduction-to-support-vector-machines)
-- [Stock Market Prediction Using](https://nicholastsmith.wordpress.com/2016/04/20/stock-market-prediction-using-multi-layer-perceptrons-with-tensorflow/)
-- [Stock Price Prediction With Big Data and Machine Learning](http://eugenezhulenev.com/blog/2014/11/14/stock-price-prediction-with-big-data-and-machine-learning/)
-- [How I made $500k with machine learning and HFT (high frequency trading)](https://jspauld.com/post/35126549635/how-i-made-500k-with-machine-learning-and-hft)
-- [Boston Data Festival Hackathon](https://www.kaggle.com/c/boston-data-festival-hackathon/data)
-- [Buffalo Capital Management](https://sites.google.com/site/predictingstockmovement/dataset-descriptions)
+1. [Introduction to Support Vector Machines](https://docs.opencv.org/2.4/doc/tutorials/ml/introduction_to_svm/introduction_to_svm.html#introduction-to-support-vector-machines)
+2. [Stock Market Prediction Using](https://nicholastsmith.wordpress.com/2016/04/20/stock-market-prediction-using-multi-layer-perceptrons-with-tensorflow/)
+3. [Stock Price Prediction With Big Data and Machine Learning](http://eugenezhulenev.com/blog/2014/11/14/stock-price-prediction-with-big-data-and-machine-learning/)
+4. [How I made $500k with machine learning and HFT (high frequency trading)](https://jspauld.com/post/35126549635/how-i-made-500k-with-machine-learning-and-hft)
+5. [Boston Data Festival Hackathon](https://www.kaggle.com/c/boston-data-festival-hackathon/data)
+6. [Buffalo Capital Management](https://sites.google.com/site/predictingstockmovement/dataset-descriptions)
+
